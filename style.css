@@ -1,0 +1,129 @@
+:root {
+  --red: rgba(211, 87, 91, 0.81);
+  --red-glow: rgba(211, 87, 91, 0.81);
+  --blue: #61e4fa;
+  --blue-glow: rgba(211, 87, 91, 0.81);
+  --black: #000000;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+html,
+body {
+  display: block;
+  background-color: var(--black);
+  color: var(--red);
+  font-family: "GinesoSoft-ConMed";
+}
+
+.wrapper {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.menu {
+  z-index: 1;
+}
+
+.menuItem {
+  margin-bottom: 41px;
+  padding: 5px;
+  cursor: pointer;
+  text-shadow: 0px 0px 3px var(--red-glow);
+  font-size: 41px;
+  z-index: 2;
+}
+
+.menuItem:hover {
+  border-color: var(--blue);
+  border-width: 1px;
+  border-style: solid;
+  color: var(--blue);
+  text-shadow: 0px 0px 3px var(--blue-glow);
+}
+
+.scanlines {
+  overflow: hidden;
+  z-index: 0;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  top: -100%;
+  left: 0;
+
+  background: repeating-linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(204, 94, 98, 0.2) 0.1%,
+      rgba(204, 94, 98, 0.2) 0.2%,
+      transparent 0.3%
+    ),
+    repeating-linear-gradient(
+      to left,
+      rgba(204, 94, 98, 0.2) 0%,
+      transparent 100%
+    );
+
+  /* animation-name: fudge; */
+  /* animation-duration: 10s; */
+  /* animation-iteration-count: infinite; */
+  /* animation-timing-function: linear; */
+  /* // animation-direction: reverse; */
+  /* animation-timing-function: ease-in-out; */
+  /* animation-direction: alternate; */
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  top: -100%;
+  left: 0;
+  /* 
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255, 107, 82, 0.4) 0.75%,
+    transparent 1.25%,
+    transparent 50%,
+     rgba(255, 107, 82, 0.4) 50.75%,
+    transparent 51.25%
+    ); */
+
+  /* animation-name: scanline;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; */
+}
+
+@keyframes fudge {
+  from {
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(0px, 20%);
+  }
+}
+
+@keyframes scanline {
+  from {
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(0px, 60%);
+  }
+}
