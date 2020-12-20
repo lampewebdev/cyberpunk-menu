@@ -4,29 +4,58 @@
   --blue: #61e4fa;
   --blue-glow: rgba(211, 87, 91, 0.81);
   --black: #000000;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
+  --yellow: #f7f500;
+  --text-shadow: rgb(0, 208, 255);
 }
 
-html,
-body {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
   display: block;
   background-color: var(--black);
   color: var(--red);
   font-family: "GinesoSoft-ConMed";
 }
 
+body {
+  padding-left: 40px;
+}
+
+.titleWrapper {
+  width: 350px;
+}
+
+.title {
+  font-family: "Cyberpunk";
+  color: var(--yellow);
+  font-size: 52px;
+  text-shadow: var(--text-shadow) 2px 3px 0px;
+}
+
+.title .p {
+  font-size: 80px;
+  letter-spacing: -0.2em;
+  font-weight: 100;
+  font-style: normal;
+  line-height: 1;
+}
+
+.subtitle {
+  color: var(--text-shadow);
+  text-align: right;
+  letter-spacing: 10px;
+  padding-right: 15px;
+}
+
 .wrapper {
-  height: 100%;
   padding: 0;
   margin: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 }
@@ -35,21 +64,57 @@ body {
   z-index: 1;
 }
 
-.menuItem {
-  margin-bottom: 41px;
-  padding: 5px;
-  cursor: pointer;
+.menuButton {
+  position: relative;
+  display: inline;
   text-shadow: 0px 0px 3px var(--red-glow);
-  font-size: 41px;
-  z-index: 2;
+  font-size: 26px;
+  overflow: hidden;
+}
+
+.menuItem {
+  position: relative;
+  margin: 4px 0;
+  padding: 10px;
+  padding-right: 140px;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+  clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 92% 100%, 100% 62%);
+  border: 2px solid transparent;
+  border-width: 0px;
+  border-style: solid;
+  text-shadow: 0px 0px 3px var(--blue-glow);
+  transition: color 1s linear;
+  transition: border-color 1s linear;
 }
 
 .menuItem:hover {
-  border-color: var(--blue);
-  border-width: 1px;
-  border-style: solid;
+  border-width: 2px;
   color: var(--blue);
-  text-shadow: 0px 0px 3px var(--blue-glow);
+  border-color: var(--blue);
+  background: rgba(0, 0, 0, 0.25);
+  transition: color 0.3s linear;
+  transition: border-color 0.3s linear;
+}
+
+.menuItem:after {
+  content: "";
+  right: -9.5%;
+  bottom: -61%;
+  position: absolute;
+  width: 39px;
+  height: 44px;
+  transform: rotate(45deg);
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+  transition: all 1s linear;
+}
+
+.menuItem:hover:after {
+  border-color: var(--blue);
+  transition: border-color 0.3s linear;
 }
 
 .scanlines {
@@ -60,70 +125,18 @@ body {
 .scanlines::before {
   content: "";
   position: absolute;
-  width: 100%;
+  width: 400px;
   height: 200%;
   top: -100%;
   left: 0;
-
-  background: repeating-linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(204, 94, 98, 0.2) 0.1%,
-      rgba(204, 94, 98, 0.2) 0.2%,
-      transparent 0.3%
-    ),
-    repeating-linear-gradient(
-      to left,
-      rgba(204, 94, 98, 0.2) 0%,
-      transparent 100%
-    );
-
-  /* animation-name: fudge; */
-  /* animation-duration: 10s; */
-  /* animation-iteration-count: infinite; */
-  /* animation-timing-function: linear; */
-  /* // animation-direction: reverse; */
-  /* animation-timing-function: ease-in-out; */
-  /* animation-direction: alternate; */
+  background: repeating-linear-gradient( to bottom, transparent 0%, rgba(204, 94, 98, 0.2) 0.1%, rgba(204, 94, 98, 0.2) 0.2%, transparent 0.3%), repeating-linear-gradient( to left, rgba(204, 94, 98, 0.2) 0%, transparent 100%);
 }
 
 .scanlines::after {
   content: "";
   position: absolute;
-  width: 100%;
+  width: 400px;
   height: 200%;
   top: -100%;
   left: 0;
-  /* 
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(255, 107, 82, 0.4) 0.75%,
-    transparent 1.25%,
-    transparent 50%,
-     rgba(255, 107, 82, 0.4) 50.75%,
-    transparent 51.25%
-    ); */
-
-  /* animation-name: scanline;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear; */
-}
-
-@keyframes fudge {
-  from {
-    transform: translate(0px, 0px);
-  }
-  to {
-    transform: translate(0px, 20%);
-  }
-}
-
-@keyframes scanline {
-  from {
-    transform: translate(0px, 0px);
-  }
-  to {
-    transform: translate(0px, 60%);
-  }
 }
