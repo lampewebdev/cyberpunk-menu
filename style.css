@@ -1,9 +1,10 @@
 :root {
   --red: rgba(211, 87, 91, 0.81);
-  --red-glow: rgba(211, 87, 91, 0.81);
+  --red-glow: rgba(211, 87, 91, 0.91);
+  --red-scanline: rgba(204, 94, 98, 0.2);
+  --black-scanline: rgba(1, 1, 1, 0.9);
+  --black-hover-background: rgba(0, 0, 0, 0.25);
   --blue: #61e4fa;
-  --blue-glow: rgba(211, 87, 91, 0.81);
-  --black: #000000;
   --yellow: #f7f500;
   --text-shadow: rgb(0, 208, 255);
 }
@@ -12,131 +13,118 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
   display: block;
-  background-color: var(--black);
-  color: var(--red);
   font-family: "GinesoSoft-ConMed";
 }
 
 body {
-  padding-left: 40px;
+  background-image: url("/bg.png");
+  background-size: cover;
 }
 
-.titleWrapper {
-  width: 350px;
-}
-
-.title {
+.logo {
   font-family: "Cyberpunk";
   color: var(--yellow);
-  font-size: 52px;
+  text-align: center;
+  font-size: 42px;
   text-shadow: var(--text-shadow) 2px 3px 0px;
+  line-height: 1.5;
+  padding: 25px 0px;
 }
 
-.title .p {
-  font-size: 80px;
-  letter-spacing: -0.2em;
-  font-weight: 100;
-  font-style: normal;
-  line-height: 1;
-}
-
-.subtitle {
+.sublogo {
+  font-family: "GinesoSoft-ConMed";
+  font-size: 24px;
   color: var(--text-shadow);
+  text-shadow: none;
   text-align: right;
-  letter-spacing: 10px;
+  letter-spacing: 24px;
   padding-right: 15px;
 }
 
-.wrapper {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .menu {
-  z-index: 1;
+  display: inline-block;
+  margin-left: 150px;
+  width: 400px;
+  height: 100%;
+  background: repeating-linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--red-scanline) 1px,
+      var(--red-scanline) 3px,
+      var(--red-scanline) 5px,
+      var(--red-scanline) 4px,
+      transparent 0.5%
+    ),
+    repeating-linear-gradient(
+      to left,
+      var(--black-scanline) 100%,
+      var(--black-scanline) 100%
+    );
 }
 
-.menuButton {
-  position: relative;
-  display: inline;
-  text-shadow: 0px 0px 3px var(--red-glow);
-  font-size: 26px;
-  overflow: hidden;
+.menu ul {
+  list-style-type: none;
+  padding: 0px 25px;
 }
 
-.menuItem {
-  position: relative;
-  margin: 4px 0;
-  padding: 10px;
-  padding-right: 140px;
+.menu ul li {
+  text-transform: uppercase;
   cursor: pointer;
-  z-index: 1;
+  /* layout */
+  position: relative;
+  padding: 10px;
+  margin: 15px 0px;
   overflow: hidden;
-  clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 92% 100%, 100% 62%);
-  border: 2px solid transparent;
-  border-width: 0px;
+  width: 350px;
+  height: 54.5px;
+  clip-path: polygon(350px 0px, 350px 29px, 322px 57px, 0px 57px, 0px 0px);
+
+  /* font */
+  color: var(--red);
+  font-size: 26px;
+  text-shadow: 0px 0px 3px var(--red-glow);
+
+  /* Border */
   border-style: solid;
-  text-shadow: 0px 0px 3px var(--blue-glow);
-  transition: color 1s linear;
-  transition: border-color 1s linear;
-}
-
-.menuItem:hover {
   border-width: 2px;
-  color: var(--blue);
-  border-color: var(--blue);
-  background: rgba(0, 0, 0, 0.25);
-  transition: color 0.3s linear;
-  transition: border-color 0.3s linear;
+  border-color: transparent;
+  /* Animation */
+  transition: color 1s ease-out;
+  transition: border-color 1s ease-out;
 }
 
-.menuItem:after {
+.menu ul li::after {
+  /* Layout */
   content: "";
-  right: -9.5%;
-  bottom: -61%;
   position: absolute;
-  width: 39px;
-  height: 44px;
+  bottom: -17px;
+  right: -17px;
+  width: 30px;
+  height: 30px;
   transform: rotate(45deg);
+
+  /* Border */
   border-width: 2px;
   border-style: solid;
   border-color: transparent;
-  transition: all 1s linear;
+
+  /* Animation */
+  transition: color 1s ease-out;
+  transition: border-color 1s ease-out;
 }
 
-.menuItem:hover:after {
+.menu ul li:hover::after,
+.menu ul li:hover {
+  color: var(--blue);
+  background: var(--black-hover-background);
+  
   border-color: var(--blue);
-  transition: border-color 0.3s linear;
-}
 
-.scanlines {
-  overflow: hidden;
-  z-index: 0;
-}
-
-.scanlines::before {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 200%;
-  top: -100%;
-  left: 0;
-  background: repeating-linear-gradient( to bottom, transparent 0%, rgba(204, 94, 98, 0.2) 0.1%, rgba(204, 94, 98, 0.2) 0.2%, transparent 0.3%), repeating-linear-gradient( to left, rgba(204, 94, 98, 0.2) 0%, transparent 100%);
-}
-
-.scanlines::after {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 200%;
-  top: -100%;
-  left: 0;
+  transition: color 0.23s linear;
+  transition: border-color 0.23s linear;
 }
